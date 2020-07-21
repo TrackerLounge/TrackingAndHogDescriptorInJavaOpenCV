@@ -38,5 +38,4 @@ Specifically, if the degree exactly equals 90 degrees, I don't have a bin for th
 This is fine but when you display the HOG on an image it can look weird.
 
 Here is an 10 x enlarged image to visuallize this:
-
 <img src='/HogInOpenCV/resources/arrowsDrawAt90degreesEnlarged.png' width=160>
