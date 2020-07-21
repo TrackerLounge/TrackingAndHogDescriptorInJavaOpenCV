@@ -37,5 +37,6 @@ This resulted in some unwanted behaviors.
 Specifically, if the degree exactly equals 90 degrees, I don't have a bin for that. As a result, that result is devided in half. Half of the value is put into the bin: 80 degrees and the other half is put into the bin: 100 degrees.
 This is fine but when you display the HOG on an image it can look weird.
 
-Here is an 10 x enlarged image to visuallize this 
+Here is an 10 x enlarged image to visuallize this:
+
 <img src='/HogInOpenCV/resources/arrowsDrawAt90degreesEnlarged.png' width=160>
