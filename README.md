@@ -38,4 +38,36 @@ Specifically, if the degree exactly equals 90 degrees, I don't have a bin for th
 This is fine but when you display the HOG on an image it can look weird.
 
 Here is an 10 x enlarged image to visuallize this:
+
 <img src='/HogInOpenCV/resources/arrowsDrawAt90degreesEnlarged.png' width=160>
+
+I found it very helpful to create small patch images to debug the process.
+There are lots of ways to get a partially correct but wrong answer.
+Without test patches, it would have been very hard to identify all the small errors I was making.
+
+<img src='/HogInOpenCV/resources/testpatchReverseDiagonal16x16.png' width=16>
+<img src='/HogInOpenCV/resources/testpatchVertical16x16.png' width=16>
+<img src='/HogInOpenCV/resources/testpatchHorizontal16x16.png' width=16>
+<img src='/HogInOpenCV/resources/testpatchDiagonal16x16.png' width=16>
+<img src='/HogInOpenCV/resources/whiteToBlackDiagonal24x24.png' width=24>
+<img src='/HogInOpenCV/resources/whiteToBlackDown24x24.png' width=24>
+
+For example, I followed a openCV tutorial on using:
+
+Core.cartToPolar(tempSobelX, tempSobelY, magnitude, angle, angleInDegrees);
+
+As part of that tutorial the sobelX and sobelY images were normalized before running cartToPolar.
+In my application this resulted in all lines running at 135 degree angle across the image being treated as lines running at 45 degrees. 
+As a result my 9 bin histogram was only filling bins: 0, 20, 40, 60, and 80. 
+
+I thought the normalizing of sobelx and sobely would allow me to ignore angles 181 degrees to 360 degrees. 
+This turned out to be not the case. I ended up having to detect and flip those degrees into the appropriate 0-180 bin range. 
+
+Without these little sample patches, I would not have discovered these error in my code.
+
+I found that drawing all 9 historgrams on the image at every point was not helpful. It was too noisy. In order to see the lines I had to add a scalar to them but this can increase the noise when lines bleed into other patches. To reduce the noise, I draw the two strongest gradients only.
+
+I found that if I output the image with 9 historgram lines draw per patch as a JPG image, the lines were heavily blurred.
+JPEG is a lossy compression algoritm and this resulted in the blurred lines. This is much more apparent on color images when all 9 bins are drawn per patch.
+To preserve clean pixel lines, I had to output the results as .png files.
+
