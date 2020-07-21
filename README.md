@@ -30,6 +30,16 @@ Image with HOG Descriptors
 <img src='/HogInOpenCV/resources/arrowsDraw.png' width=800>
 
 # Observations
+I originally wrote all HOG logic as double[] hog array lists.
+I found that row shifting on a single dimentional array was fast to compute but error prone.
+Ultimately I abandoned it in favor of a slower but easier to reason about set of Value Object classes, containing the X,Y coordinates and the double[] hog value. 
+This ran slightly slower but was much easier to see errors. 
+This performance it did not matter in my case but in a production setting, this could be costly.
+
+I have not added image padding to the x or y axis. As a result, we can have partial blocks. 
+You may want to add padding to the edge of the image to ensure multiples of 16 block widths.
+I chose to ignore these partial blocks.
+
 In my implementation, I used a HOG of 9 Bins.
 I used degrees: 0, 20, 40, 60, 80, 100, 120, 140, 160
 I proportionally devided values that fell between to bins based on nearness.
@@ -52,6 +62,11 @@ Without test patches, it would have been very hard to identify all the small err
 <img src='/HogInOpenCV/resources/whiteToBlackDiagonal24x24.png' width=24>
 <img src='/HogInOpenCV/resources/whiteToBlackDown24x24.png' width=24>
 
+Note: because I ignore partial block sizes (see above), small blocks can cause index-out-of-bounds exceptions in my code.
+While debugging with these small images, I would temporarily change the for-loop max size to be the patch size (8) rather than the window size (16).
+I found this annoying but not enough so to redirect my efforts to fix that bit. 
+Perhaps if I spent a little longer with this code, I'd become annoyed enough by it to fix the problem.
+
 For example, I followed a openCV tutorial on using:
 
 Core.cartToPolar(tempSobelX, tempSobelY, magnitude, angle, angleInDegrees);
@@ -71,3 +86,5 @@ I found that if I output the image with 9 historgram lines draw per patch as a J
 JPEG is a lossy compression algoritm and this resulted in the blurred lines. This is much more apparent on color images when all 9 bins are drawn per patch.
 To preserve clean pixel lines, I had to output the results as .png files.
 
+The HOG lines when draw looked different than the examples I was seeing on-line. 
+It turns out that when HOG lines are draw, they are rotated by -90 degrees before being draw. 
