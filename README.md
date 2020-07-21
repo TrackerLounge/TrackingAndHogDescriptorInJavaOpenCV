@@ -46,8 +46,10 @@ You may want to add padding to the edge of the image to ensure multiples of 16 b
 I chose to ignore these partial blocks.
 
 In my implementation, I used a HOG of 9 Bins.
-I used degrees: 0, 20, 40, 60, 80, 100, 120, 140, 160
-I proportionally devided values that fell between to bins based on nearness.
+I used degrees: 
+0, 20, 40, 60, 80, 100, 120, 140, 160
+
+I proportionally divided values that fell between to bins based on nearness.
 This resulted in some unwanted behaviors.
 Specifically, if the degree exactly equals 90 degrees, I don't have a bin for that. As a result, that result is devided in half. Half of the value is put into the bin: 80 degrees and the other half is put into the bin: 100 degrees.
 This is fine but when you display the HOG on an image it can look weird.
