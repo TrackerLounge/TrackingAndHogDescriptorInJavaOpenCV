@@ -28,7 +28,7 @@ Original Image
 
 <img src='/HogInOpenCV/resources/LF_20in_Stride_Wet_Sand_Binary_Small.jpg' width=800>
 
-Npte: For a dicussion on how the original image was created see [Tracking and Edge Detection](https://github.com/TrackerLounge/TrackingAndEdgeDetection) and look at the FFT process.
+Note: For a dicussion on how the original image was created see [Tracking and Edge Detection](https://github.com/TrackerLounge/TrackingAndEdgeDetection) and look at the FFT process.
 
 Image with HOG Descriptors
 
