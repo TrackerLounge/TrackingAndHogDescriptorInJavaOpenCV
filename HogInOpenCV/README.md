@@ -9,7 +9,7 @@ I referenced serveral tutorials on HOG including:
 - https://www.youtube.com/watch?v=7S5qXET179I
     - This is a long presentation - 1:30 hours on detecting humans in images programmatically.
     - He used 3000 positive training images as well as other false images.
-    - He talks about feeding these HOGS into a Featore Vector list and using that in a Learn algorithm
+    - He talks about feeding these HOGS into a Feature Vector list and using that in a Learn algorithm
     - All training images start with same sized images (fixed scale - 64x128) with the person in the center of the image. The size of the block (8x8) was big enough to hold 1-2 limbs of a human body. Pick your block size based on your data. Pick your fixed scale size based on your data. The images need to be big enough for you to tell what they are.
     - Then train on negative images at every location and every scale
     - He talks about testing and training sets. He doubled his data by flipping images along y axis.
