@@ -14,7 +14,7 @@ Note: After I had written the code, I discovered that OpenCV has a Java implemen
 - Eclipse IDE (Version: 2019-06 (4.12.0) Build id: 20190614-1200)
 - Java 8 version 101
 - OpenCV 4.3.0
-    - There are several odd steps required to run openCV in Eclipse. I suspect this is because is wrapping C++ code within the jars???
+    - There are several odd steps required to run openCV in Eclipse. I suspect this is because of the java wrapping of C++ code within the jars???
     - [Installing OpenCV for Java](https://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-java.html)
     - [Running OpenCV in Eclipse](https://opencv-java-tutorials.readthedocs.io/en/latest/02-first-java-application-with-opencv.html)
 
