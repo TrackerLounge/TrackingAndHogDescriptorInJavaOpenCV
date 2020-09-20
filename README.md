@@ -8,6 +8,7 @@ It was written quickly with an eye to understand the process rather than for per
 I referenced [Histogram of Oriented Gradients](https://www.learnopencv.com/histogram-of-oriented-gradients/)
 
 Note: After I had written the code, I discovered that OpenCV has a Java implementation of [HogDescriptor](https://docs.opencv.org/3.4/javadoc/org/opencv/objdetect/HOGDescriptor.html)
+I experimented with the OpenCV implementation of the HOGDescriptor in [HogCompare](https://github.com/TrackerLounge/TrackingAndHogDescriptorInJavaOpenCV/tree/master/HOGCompare) project.
 
 # Coding Environment
 - Windows 10 Operating System
