@@ -2,7 +2,7 @@
 
 
 # Youtube Video
-[![Alt text](https://github.com/TrackerLounge/TrackAndSoleComparison/blob/master/resources/slash_screen_small.jpg)](https://www.youtube.com/watch?v=dXSyIhgNh3M)
+[![Alt text](https://github.com/TrackerLounge/TrackingAndHogDescriptorInJavaOpenCV/blob/master/HOGCompare/resources/splashSceen.jpg)](https://www.youtube.com/watch?v=dXSyIhgNh3M)
 
 # Description
 
