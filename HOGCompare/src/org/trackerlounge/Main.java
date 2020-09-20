@@ -2,6 +2,8 @@ package org.trackerlounge;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -135,10 +137,10 @@ public class Main {
 	// https://www.learnopencv.com/handwritten-digits-classification-an-opencv-c-python-tutorial/
 	// https://stackoverflow.com/questions/27343614/opencv-hogdescriptor-compute-error
 	public static HOGDescriptor createHOGDescriptor() {
-		Size winSize = new Size(32, 32);//new Size(64, 64);//new Size(20, 20);
-		Size blockSize = new Size(16, 16); //new Size(10, 10);
-		Size blockStride = new Size(8, 8);//new Size(8, 8); // new Size(5, 5);
-		Size cellSize = new Size(8, 8); // new Size(10, 10);
+		Size winSize = new Size(64, 64);//new Size(32, 32);//new Size(64, 64);//This must match the dimensions of your template image.
+		Size blockSize = new Size(16, 16); 
+		Size blockStride = new Size(8, 8);
+		Size cellSize = new Size(8, 8); 
 		int nbins = 9;
 		int derivAperture = 1;
 		double winSigma = -1.0;
@@ -165,21 +167,21 @@ public class Main {
 		return descriptors;
 	}
 
-	public static void doHog(Mat img, MatOfFloat descriptors) {
+	public static void doHogInSingleScale(Mat img, MatOfFloat descriptors) {
 		HOGDescriptor mHOGDescriptor = createHOGDescriptor();// = new HOGDescriptor();
 		System.out
 				.println("Descriptor width: " + descriptors.size().width + " -- height: " + descriptors.size().height);
 		mHOGDescriptor.setSVMDetector(descriptors);
-
-		/*
 		final MatOfPoint foundLocations = new MatOfPoint();
 		final MatOfDouble foundWeights = new MatOfDouble();
 		final Size winStride = mHOGDescriptor.get_blockStride();//new Size(8, 8);
 		final Size padding = new Size(32, 32);//new Size(32, 32);
 
-//		mHOGDescriptor.detect(img, foundLocations, foundWeights, 100.0, winStride, padding);
-//		mHOGDescriptor.detect(img, foundLocations, foundWeights, 165.0, winStride, padding);
 		mHOGDescriptor.detect(img, foundLocations, foundWeights, 0.0, winStride, padding);
+		drawMatches(img, foundLocations, foundWeights);
+	}
+	
+	public static void drawMatches(Mat img, MatOfPoint foundLocations, MatOfDouble foundWeights) {
 		Point[] array = foundLocations.toArray();
 		double[] weights = foundWeights.toArray();
 		int maxIndex = -1;
@@ -204,29 +206,29 @@ public class Main {
 		Point rect = array[maxIndex];
 		Imgproc.rectangle(img, new Point(rect.x, rect.y),
 				new Point(rect.x + 64, rect.y + 64), new Scalar(0, 255, 0));
-				*/
+	}
+	
+	
+	public static void doHogInMultiScale(Mat img, MatOfFloat descriptors) {
+		HOGDescriptor mHOGDescriptor = createHOGDescriptor();// = new HOGDescriptor();
+		System.out
+				.println("Descriptor width: " + descriptors.size().width + " -- height: " + descriptors.size().height);
+		mHOGDescriptor.setSVMDetector(descriptors);
 
 		
 		final MatOfRect foundLocations = new MatOfRect();
 		final MatOfDouble foundWeights = new MatOfDouble();
 		final Size winStride = mHOGDescriptor.get_blockStride();//new Size(8, 8);
 		final Size padding = new Size(32, 32);//new Size(32, 32);
-		
-		
-		
-		
 
-
-
-mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 0.7, winStride, padding, 1.05, 2.0, true);//0.7
-		
-		
-		
-		
-		
+		mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 0.7, winStride, padding, 1.05, 2.0, true);//0.7
 //		mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 0.0, winStride, padding);
 //		mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 1.0, winStride, padding, 1.0, 31.0, true);//Best one so far for Size blockStride = new Size(8, 8);
 //		mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 0.0, winStride, padding, 1.05, 2.0, false);
+		drawMatches(img, foundLocations, foundWeights);
+	}
+	
+	public static void drawMatches(Mat img, MatOfRect foundLocations, MatOfDouble foundWeights) {
 		Rect[] array = foundLocations.toArray();
 		double[] weights = foundWeights.toArray();
 		int maxIndex = -1;
@@ -259,28 +261,40 @@ mHOGDescriptor.detectMultiScale(img, foundLocations, foundWeights, 0.7, winStrid
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 //		String filename1 = getResourcePath() + "testHorizontal20x20.png";
 //		String filename1 = getResourcePath() + "testPatch64x64.png";
-		String filename1 = getResourcePath() + "track_tread_patch_32_for_200pixelImage.png";
-//		String filename1 = getResourcePath() + "track_tread_patch_64_for_200pixelImage.png";
+//		String filename1 = getResourcePath() + "track_tread_patch_32_for_200pixelImage.png";
+		String filename1 = getResourcePath() + "track_tread_patch_64_for_200pixelImage.png";
 //		String filename1 = getResourcePath() + "RF_Merrill_WetSand_VerySlow_Colored_Z_axis_small.jpg";
 //		String filename1 = getResourcePath() + "my_merrill_small.JPG";
 //		String filename1 = getResourcePath() + "my_merrill_small_edge.jpg";
 //		String filename1 = getResourcePath() + "merrill_shiver_moc_shoe.jpg";
 //		String filename2 = getResourcePath() + "testPatch512x512.png";
 //		String filename2 = getResourcePath() + "testPatch512x512_8Cases.png";
-//		String filename2 = getResourcePath() + "RF_Merrill_WetSand_VerySlow_Colored_Z_axis_small_200.jpg";
+		String filename2 = getResourcePath() + "RF_Merrill_WetSand_VerySlow_Colored_Z_axis_small_200.jpg";
 //		String filename2 = getResourcePath() + "my_merrill_small_200.PNG";
 //		String filename2 = getResourcePath() + "merrill_shiver_moc_shoe_200.png";
 //		String filename2 = getResourcePath() + "LF_20in_Stride_Wet_Sand_Binary_Small_200.jpg";
 //		String filename2 = getResourcePath() + "LF_crock_200.jpg";
 //		String filename2 = getResourcePath() + "original_raw_track_small_200.png";
-		String filename2 = getResourcePath() + "convers_shoe_sole_200.png";
+//		String filename2 = getResourcePath() + "convers_shoe_sole_200.png";
 		Mat src = Main.loadImage(filename1);
 		Mat imageToSearch = Main.loadImage(filename2);
 //		src = enlargeImageBoader(src);
 //		imageToSearch = enlargeImageBoader(imageToSearch);
 
+		long start = System.currentTimeMillis();
+		
 		MatOfFloat descriptors = getHogDescriptor(src);
-		doHog(imageToSearch, descriptors);
+//		doHogInSingleScale(imageToSearch, descriptors);
+		doHogInMultiScale(imageToSearch, descriptors);
+		
+		long end = System.currentTimeMillis();
+		NumberFormat formatter = new DecimalFormat("#0.00000");
+		System.out.println("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
+		System.out.println(" ---- OR ----");
+		System.out.println("Execution time is " + formatter.format(((end - start) / 1000d) / 60d) + " minutes");
+		System.out.println(" ---- OR ----");
+		System.out
+				.println("Execution time is " + formatter.format((((end - start) / 1000d) / 60d) / 60d) + " hours");
 		
 		Mat result = imageToSearch.clone();
 		
