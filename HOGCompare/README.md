@@ -36,3 +36,6 @@ https://www.pyimagesearch.com/2015/11/16/hog-detectmultiscale-parameters-explain
 # Other areas to research
 Can we enable CUDA?
 https://programming.vip/docs/compile-opencv-with-cuda-support-on-windows-10.html
+
+Perhaps I can pair matches with SURF or ORB to remove / cull bad matches?
+https://stackoverflow.com/questions/53079167/emgucv-opencv-orbdetector-finding-only-bad-matches
