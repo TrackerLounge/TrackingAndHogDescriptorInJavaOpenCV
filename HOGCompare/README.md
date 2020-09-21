@@ -21,6 +21,8 @@ In order to run this code, you will need to:
 
 https://docs.opencv.org/2.4/modules/gpu/doc/object_detection.html#gpu-hogdescriptor-detectmultiscale
 
+https://javadoc.io/doc/org.bytedeco.javacpp-presets/opencv/latest/org/bytedeco/javacpp/opencv_objdetect.HOGDescriptor.html
+
 https://www.learnopencv.com/histogram-of-oriented-gradients/
 
 https://www.youtube.com/watch?v=oFVexhcltzE
