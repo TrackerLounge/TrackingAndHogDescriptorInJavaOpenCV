@@ -33,6 +33,8 @@ https://stackoverflow.com/questions/27343614/opencv-hogdescriptor-compute-error
 
 https://www.pyimagesearch.com/2015/11/16/hog-detectmultiscale-parameters-explained/ 
 
+https://upcommons.upc.edu/bitstream/handle/2099.1/21343/95066.pdf
+
 # Other areas to research
 Can we enable CUDA?
 https://programming.vip/docs/compile-opencv-with-cuda-support-on-windows-10.html
