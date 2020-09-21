@@ -32,3 +32,7 @@ https://www.learnopencv.com/handwritten-digits-classification-an-opencv-c-python
 https://stackoverflow.com/questions/27343614/opencv-hogdescriptor-compute-error
 
 https://www.pyimagesearch.com/2015/11/16/hog-detectmultiscale-parameters-explained/ 
+
+# Other areas to research
+Can we enable CUDA?
+https://programming.vip/docs/compile-opencv-with-cuda-support-on-windows-10.html
