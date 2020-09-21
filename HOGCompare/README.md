@@ -19,6 +19,8 @@ In order to run this code, you will need to:
 
 # Potential Useful Links:
 
+https://docs.opencv.org/2.4/modules/gpu/doc/object_detection.html#gpu-hogdescriptor-detectmultiscale
+
 https://www.learnopencv.com/histogram-of-oriented-gradients/
 
 https://www.youtube.com/watch?v=oFVexhcltzE
